@@ -15,8 +15,73 @@
       align-items: center;
     }
 
-    header {
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       background-color: #2d3748;
+      color: white;
+      padding: 2rem 0;
+      width: 100%;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem; /* this gives left/right space inside the center column */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .hamburger {
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      display: none;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-links li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: #2d3748;
+        position: absolute;
+        top: 60px;
+        right: 1rem;
+        padding: 1rem;
+        border-radius: 8px;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+    }
+
+    header {
+      background-color: #56b83e;
       color: white;
       width: 100%;
       padding: 1rem;
@@ -28,6 +93,7 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       width: 90%;
+      height: 650px;
       max-width: 400px;
       margin: 2rem 0;
       padding: 1rem;
@@ -36,6 +102,9 @@
 
     .card img {
       max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      object-fit: cover;
       border-radius: 10px;
     }
 
@@ -65,13 +134,28 @@
   </style>
 </head>
 <body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">JunkSwap</div>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">List Item</a></li>
+      <li><a href="#">My Picks</a></li>
+      <li><a href="#">Profile</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header Banner
   <header>
     <h1>JunkSwap</h1>
     <p>Take someone else's junk and earn a reward!</p>
-  </header>
+  </header> -->
 
+  <!-- Card Section -->
   <div class="card" id="junkCard">
-    <img src="https://via.placeholder.com/400x250" alt="Junk Item" />
+    <img src="chair.webp" alt="Junk Item" />
     <h2>Old Office Chair</h2>
     <p>Will give $10 Starbucks card if you pick it up by Friday.</p>
     <div class="buttons">
@@ -80,6 +164,7 @@
     </div>
   </div>
 
+  <!-- Script -->
   <script>
     const items = [
       {
@@ -95,7 +180,7 @@
       {
         title: "Bike with Flat Tire",
         description: "Free, but you'll have to fix it.",
-        image: "https://via.placeholder.com/400x250/999999/ffffff"
+        image: "chair.webp"
       }
     ];
 
@@ -111,7 +196,12 @@
       card.querySelector('p').innerText = items[current].description;
       card.querySelector('img').src = items[current].image;
     }
+
+    function toggleMenu() {
+      const nav = document.getElementById('navLinks');
+      nav.classList.toggle('show');
+    }
   </script>
+
 </body>
 </html>
-
